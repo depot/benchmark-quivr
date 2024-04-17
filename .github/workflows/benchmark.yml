@@ -1,8 +1,7 @@
 name: Benchmark
-
 on:
-  workflow_dispatch: {}
   push: {}
+  workflow_dispatch: {}
 
 permissions:
   contents: read
@@ -11,15 +10,14 @@ permissions:
 jobs:
   build-with-depot:
     name: Build with Depot
-    runs-on: depot-ubuntu-latest
+    runs-on: depot-ubuntu-22.04
     steps:
-      - uses: actions/checkout
+      - uses: actions/checkout@v3
         with:
           submodules: recursive
-
       - uses: depot/setup-action@v1
 
-      - name: Build and tag image
+      - name: Build image
         uses: depot/build-push-action@v1
         with:
           context: ./upstream/backend/
