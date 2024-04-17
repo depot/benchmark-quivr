@@ -4,14 +4,16 @@ on:
   workflow_dispatch: {}
   push: {}
 
+permissions:
+  contents: read
+  id-token: write
+
 jobs:
   build-with-depot:
-    name: Build image with Depot
-    runs-on: ubuntu-latest
-
+    name: Build with Depot
+    runs-on: depot-ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout
+      - uses: actions/checkout
         with:
           submodules: recursive
 
@@ -22,3 +24,4 @@ jobs:
         with:
           context: ./upstream/backend/
           platforms: linux/amd64,linux/arm64
+          project: qs6t70m51x
